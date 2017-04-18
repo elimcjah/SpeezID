@@ -1,0 +1,104 @@
+{
+	"photo": {
+		"id": "29923791365",
+		"secret": "47e487ed00",
+		"server": "8124",
+		"farm": 9,
+		"dateuploaded": "1474827750",
+		"isfavorite": 0,
+		"license": "0",
+		"safety_level": "0",
+		"rotation": 0,
+		"originalsecret": "eabfc0203d",
+		"originalformat": "jpg",
+		"owner": {
+			"nsid": "20984644@N05",
+			"username": "lesterpearce",
+			"realname": "Les Pearce",
+			"location": "",
+			"iconserver": "0",
+			"iconfarm": 0,
+			"path_alias": "lespearce"
+		},
+		"title": {
+			"_content": "Ostrich Posing"
+		},
+		"description": {
+			"_content": ".\n"
+		},
+		"visibility": {
+			"ispublic": 1,
+			"isfriend": 0,
+			"isfamily": 0
+		},
+		"dates": {
+			"posted": "1474827750",
+			"taken": "2016-08-15 11:18:01",
+			"takengranularity": "0",
+			"takenunknown": "0",
+			"lastupdate": "1474828239"
+		},
+		"views": "24",
+		"editability": {
+			"cancomment": 0,
+			"canaddmeta": 0
+		},
+		"publiceditability": {
+			"cancomment": 1,
+			"canaddmeta": 0
+		},
+		"usage": {
+			"candownload": 1,
+			"canblog": 0,
+			"canprint": 0,
+			"canshare": 1
+		},
+		"comments": {
+			"_content": "0"
+		},
+		"notes": {
+			"note": []
+		},
+		"people": {
+			"haspeople": 0
+		},
+		"tags": {
+			"tag": [
+				{
+					"id": "20979304-29923791365-197542",
+					"author": "20984644@N05",
+					"authorname": "lesterpearce",
+					"raw": "Western Cape",
+					"_content": "westerncape",
+					"machine_tag": 0
+				},
+				{
+					"id": "20979304-29923791365-1699",
+					"author": "20984644@N05",
+					"authorname": "lesterpearce",
+					"raw": "South Africa",
+					"_content": "southafrica",
+					"machine_tag": 0
+				},
+				{
+					"id": "20979304-29923791365-690359",
+					"author": "20984644@N05",
+					"authorname": "lesterpearce",
+					"raw": "Struthio camelus",
+					"_content": "struthiocamelus",
+					"machine_tag": 0
+				}
+			]
+		},
+		"urls": {
+			"url": [
+				{
+					"type": "photopage",
+					"_content": "https://www.flickr.com/photos/lespearce/29923791365/"
+				}
+			]
+		},
+		"media": "photo"
+	},
+	"stat": "ok"
+}

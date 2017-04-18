@@ -3,15 +3,22 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "run-one-flickr": "node ./public/javascripts/get-images/image-search.js",
+    "run-many-flickr": "node ./public/javascripts/get-images/image-search-batch.js"
   },
   "dependencies": {
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
+    "csvtojson": "^1.1.4",
     "debug": "~2.6.0",
     "express": "~4.14.1",
+    "global": "^4.3.1",
+    "mongoose": "^4.9.5",
     "morgan": "~1.7.0",
+    "node-sass-middleware": "0.9.8",
     "pug": "~2.0.0-beta10",
+    "request": "^2.81.0",
     "serve-favicon": "~2.3.2"
   }
 }
