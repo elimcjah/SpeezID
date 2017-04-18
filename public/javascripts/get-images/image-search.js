@@ -22,12 +22,8 @@ const getImageURL = '/services/rest/?method=flickr.photos.getSizes';
 
 const dir         = './big_files/flickr/';
 
-// This is the only item changed to change the search
-let searchTerm    = 'Struthio camelus';
 
-// let keyword       = searchTerm.split(' ').join('+');
-
-// let familyDir     = dir + keyword + '/';
+//TODO make a change to push cwd __dirname and pop it off at the end
 
 class ImageSearch {
     constructor(searchTerm) {
@@ -260,5 +256,4 @@ class ImageSearch {
     }
 }
 
-(new ImageSearch(searchTerm)).getPhoto();
 module.exports = ImageSearch;

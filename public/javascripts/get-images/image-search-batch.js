@@ -1,12 +1,13 @@
 
-const search = require('./image-search.js');
+let ImageSearch = require('./image-search');
 
 
+let searchTerm = 'Struthio camelus australis';
 
-
-
-
-
-for (i = 0; i < 25; i++){
-    require('child_process').execSync('node ./public/javascripts/get-images/image-search.js')
+for (let i = 0; i < 10; i++){
+    (new ImageSearch(searchTerm)).getPhoto();
 }
+
+
+
+
