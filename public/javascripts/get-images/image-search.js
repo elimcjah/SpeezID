@@ -1,7 +1,7 @@
 /**
  * @namespace image-search
  * @author Elijah McClendon <Elijah@davinciinstitute.com>
- * @summary image-search uses asynchronous calls with promises to save images/data from Flickr and combine with select
+ * @description image-search uses asynchronous calls with promises to save images/data from Flickr and combine with select
  * information from the saved Clements Database of birds.
  *
  * @link https://www.flickr.com/services/api/|Flickr API

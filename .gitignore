@@ -5,7 +5,7 @@
 # IntelliJ project files
 .idea
 *.iml
-out
+#out
 gen### Node template
 # Logs
 logs
