@@ -1,15 +1,20 @@
 /**
+ * @namespace image-search
  * @author Elijah McClendon <Elijah@davinciinstitute.com>
- *
  * @summary image-search uses asynchronous calls with promises to save images/data from Flickr and combine with select
  * information from the saved Clements Database of birds.
  *
- * @namespace image-search
- * See {@link https://www.flickr.com/services/api/|Flickr API} &
- * {@link http://cloudinary.com/documentation/solution_overview|Cloudinary API} for 3rd Party API information
+ * @link https://www.flickr.com/services/api/|Flickr API
+ * @link http://cloudinary.com/documentation/solution_overview Cloudinary API
+ * @requires cloudinary
+ * @requires fs
+ * @requires mongoose
+ * @requires request
  */
 
 /**
+ * A List of Constants & required modules for the ImageSearch class
+ *
  * @constant {String} cloudinary - calls the cloudinary node module for uploading photos
  * @constant {String} dir - appended to the beginning of image name so Cloudinary stays organized
  * @constant {String} fs - calls the Core fs module (File System Module)
@@ -19,8 +24,8 @@
  * @constant {String} mongoose - calls the mongoose node module for abstraction of MongoDB data
  * @constant {String} request - calls the request node module for making http requests
  * @constant {String} search - specific directory to add to Flickr API URL to perform a keyword search
- * @constant {String} url - base URL for flickr API **/
-
+ * @constant {String} url - base URL for flickr API
+ */
 const cloudinary  = require('cloudinary');
 const dir         = 'flickr/';
 const fs          = require('fs');
@@ -53,7 +58,7 @@ class ImageSearch {
     /**
      * @summary Takes an object from clementsDB, reduces it down to just 'Scientific name',calls flickr api for image,
      * save image to Cloudinary, & then saves JSON data about photos and species to image collection in MongoDB.
-     * @name ImageSearch
+     * @namespace ImageSearch
      * @class
      * @classdesc ImageSearch takes an input of an object, usually sent from ./image-search-batch.js, and reduces the
      * object down to just the scientific name. Asynchronous calls are then made in following order. First, the
@@ -63,8 +68,8 @@ class ImageSearch {
      * take an image id and call the getSizes api. In turn, a selection is made to the size desired and a URL is
      * returned. Third, we again use the same id used in getFlickrPhoto() method that was generated in search() method
      * to make another api call to Flickr using constants url, key, and getInfo. This call returns all the JSON data
-     * associated with the image and user that uploaded the image. Fourth, we will use the storeFile() method with
-     * params of imageURL and id to push the image to our Cloudinary cloud server. The storeFile() method also uses
+     * associated with the image and user that uploaded the image. Fourth, we will use the saveToCloud() method with
+     * params of imageURL and id to push the image to our Cloudinary cloud server. The saveToCloud() method also uses
      * cloudinary config data, keyword, and familyDir to create filename, enabling us to keep the Cloudinary storage
      * organized.
      *
@@ -84,12 +89,22 @@ class ImageSearch {
         this.keyword       = this.clementsObj['Scientific name'].split(' ').join('+');
     }
 
-
+    /**
+     * @name getPhoto
+     * @alias ImageSearch().getPhoto()
+     * @Description Coming Soon!
+     * @method
+     * @methodOf ImageSearch
+     * @memberOf ImageSearch
+     *
+     * @returns stuff
+     * @example let imageSearch = new ImageSearch(JSONObjectFromClementsDB).getPhoto();
+     */
     getPhoto() {
         this.search().then((id) =>
             this.getFlickrPhoto(id).then((imageURL) =>
                 this.getPhotoContents(id).then((flickrJson) =>
-                    this.storeFile(imageURL, id).then((imagePath) =>
+                    this.saveToCloud(imageURL, id).then((imagePath) =>
                             console.log('Image successfully created at ' + JSON.stringify(imagePath.secure_url) +
                                 ' with FlickrJSON of' + JSON.stringify(flickrJson, null, "\t"))
                     ))));
@@ -98,15 +113,17 @@ class ImageSearch {
     /**
      * @name getFlickrPhoto
      * @alias ImageSearch().getFlickrPhoto(id)
-     * @methodOf ImageSearch
-     * @method getFlickrPhoto
      * @description The id returned from search() method is used as an input param with the constants url, key,
      * and getImageURL. The method takes an image id and calls the getSizes api. In turn, a selection
      * is made to the size desired with the variable sizeOfImage and a URL is returned to an image of selected size.
-     * @param id
+     * @method getFlickrPhoto
+     * @methodOf ImageSearch
+     * @memberOf ImageSearch
+     * @param {number} id - id is a number associated to a specific image from flickr and found
+     * with ImageSearch().getPhoto()
      * @returns {Promise} imageURL - sends back an imageURL to the getPhoto chain of Promises.
+     * @example this.getFlickrPhoto(id)
      */
-
     getFlickrPhoto (id){
 
         return new Promise((resolve, reject) => {
@@ -128,8 +145,8 @@ class ImageSearch {
              */
             let req = this.network.request(options, function (res) {
 
-                /** @type {string} sizeOfImage - determines the size of the Flickr Image to save  */
-                let sizeOfImage = 'Medium';
+                /** @constant {string} sizeOfImage - determines the size of the Flickr Image to save  */
+                const sizeOfImage = 'Medium';
 
                 let chunks = [];
 
@@ -165,6 +182,19 @@ class ImageSearch {
         })
     }
 
+    /**
+     *
+     * @name getPhotoContents
+     * @alias ImageSearch().getPhotoContents()
+     * @Description Coming Soon!
+     * @method
+     * @methodOf ImageSearch
+     * @memberOf ImageSearch
+     * @param {number} id - id is a number associated to a specific image from flickr and found
+     * with ImageSearch().getPhoto()
+     * @returns {Promise}
+     * @example Coming Soon!
+     */
     getPhotoContents(id) {
 
         return new Promise((resolve, reject) => {
@@ -203,8 +233,43 @@ class ImageSearch {
     }
 
     /**
-     * Uses an input of this.keyword
+     * @name saveToCloud
+     * @alias ImageSearch().saveToCloud()
+     * @Description Coming Soon!
+     * @method
+     * @methodOf ImageSearch
+     * @memberOf ImageSearch
+     * @param {string} imageURL - URL associated to a specific image of a specific size.
+     * @param {number} id - d is a number associated to a specific image from flickr and found
+     * with ImageSearch().getPhoto()
      * @returns {Promise}
+     * @example Coming Soon!
+     */
+    saveToCloud(imageURL, id){
+        console.log('saveToCloud');
+        return new Promise((resolve, reject) => {
+
+            let jpgFile = this.familyDir + this.keyword + '-' + id;
+
+            let cloudinaryResult = cloudinary.uploader.upload(imageURL,
+                function(result) { console.log(result) },
+                { public_id: jpgFile });
+            resolve(cloudinaryResult);
+        });
+    }
+
+    /**
+     * @name search()
+     * @alias ImageSearch().search()
+     * @Description Uses this.keyword from constructor, @constant url, @constant key, and @constant search
+     * to call Flickr API using nodes core HTTP request. Resolves the promise by sending back an image id to the
+     * getPhoto() method where it will be passed to the next method in a chain of Promises.
+     * @method
+     * @methodOf ImageSearch
+     * @memberOf ImageSearch
+     *
+     * @returns {Promise}
+     * @example this.search().then(id)=> Wait for the promise to resolve then move to the next Async call
      */
     search() {
 
@@ -245,6 +310,18 @@ class ImageSearch {
         })
     }
 
+    /**
+     * @name storeFileJSONinfo
+     * @alias ImageSearch().storeFileJSONinfo()
+     * @Description Coming Soon!
+     * @method
+     * @methodOf ImageSearch
+     * @memberOf ImageSearch
+     *
+     * @param {object} contents - JSON object with data about image of specific id.
+     * @returns {Promise}
+     * @example Coming Soon!
+     */
     storeFileJSONinfo(contents) {
 
         return new Promise((resolve, reject) => {
@@ -274,18 +351,7 @@ class ImageSearch {
         });
     }
 
-    storeFile(imageURL, id){
-        console.log('storeFile');
-        return new Promise((resolve, reject) => {
 
-             let jpgFile = this.familyDir + this.keyword + '-' + id;
-
-             let cloudinaryResult = cloudinary.uploader.upload(imageURL,
-                function(result) { console.log(result) },
-                { public_id: jpgFile });
-            resolve(cloudinaryResult);
-        });
-    }
 }
 
 module.exports = ImageSearch;
