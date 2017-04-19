@@ -1,6 +1,34 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: image-search.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: image-search.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * @namespace image-search
- * @author Elijah McClendon <Elijah@davinciinstitute.com>
+ * @author Elijah McClendon &lt;Elijah@davinciinstitute.com>
  * @description image-search uses asynchronous calls with promises to save images/data from Flickr and combine with select
  * information from the saved Clements Database of birds.
  *
@@ -13,7 +41,7 @@
  */
 
 /**
- * A List of Constants & required modules for the ImageSearch class
+ * A List of Constants &amp; required modules for the ImageSearch class
  *
  * @constant {String} cloudinary - calls the cloudinary node module for uploading photos
  * @constant {String} dir - appended to the beginning of image name so Cloudinary stays organized
@@ -31,19 +59,14 @@ const dir         = 'flickr/';
 const fs          = require('fs');
 const getImageURL = '/services/rest/?method=flickr.photos.getSizes';
 const getInfo     = '/services/rest/?method=flickr.photos.getInfo';
-const key         = '&api_key=b2262c0ff71fe60473136cc5ecb7b6a4';
+const key         = '&amp;api_key=b2262c0ff71fe60473136cc5ecb7b6a4';
 const mongoose    = require('mongoose');
 const request     = require('request');
 const search      = '/services/rest/?method=flickr.photos.search';
 const url         = 'api.flickr.com';
 
 
-const Clements = new require('../../../model/clements.js');
-const Image = new require('../../../model/images.js');
 
-mongoose.connect('mongodb://localhost:27017/speezid');
-
-const goose = mongoose.connection;
 
 cloudinary.config({
     cloud_name: 'elijahs',
@@ -51,29 +74,18 @@ cloudinary.config({
     api_secret: 'Ef8mZYvcc_LWY48a1VOVKmcWd4Y'
 });
 
-let order = 'Galliformes';
-let clementsArray = [];
-let iterations = -1;
-let keyword = [];
-let keepAlphabetical = 0;
-let imagesUploaded = 0;
-
 
 /**
  * @TODO make a change to push cwd __dirname and pop it off at the end
  * @TODO hide private API keys somewhere not visible to public or anyone else if project is on github.
- * @TODO think about how to deal with 1 image being same for different scientific names and uploading twice to cloudinary
- * @TODO fix images uploaded number count
- * @TODO make more efficient how to deal with no result for id.
- * @TODO make sure that a return of 5565732642 really does mean that there was no image for those keywords
- * @TODO clean up the code.
+ * @TODO push data from clementsobj, flickrJSON, and cloudinary to imageDB
  */
 
 class ImageSearch {
 
     /**
      * @summary Takes an object from clementsDB, reduces it down to just 'Scientific name',calls flickr api for image,
-     * save image to Cloudinary, & then saves JSON data about photos and species to image collection in MongoDB.
+     * save image to Cloudinary, &amp; then saves JSON data about photos and species to image collection in MongoDB.
      * @namespace ImageSearch
      * @class
      * @classdesc ImageSearch takes an input of an object, usually sent from ./image-search-batch.js, and reduces the
@@ -96,34 +108,34 @@ class ImageSearch {
      * @example
      * let imageSearch = new ImageSearch(objectFromClementsDB).getPhoto();
      */
-    constructor() {
+    constructor(object) {
 
         this.network = require('https');
-        //clementsArray[iterations]   = object;
-        // this.familyDir     = dir + this.keyword + '/';
+        this.clementsObj   = object;
+        this.familyDir     = dir + this.keyword + '/';
         this.jsonExt = '.json';
-       // this.keyword       = clementsArray[iterations]['Scientific name'].split(' ').join('+');
+        this.keyword       = this.clementsObj['Scientific name'].split(' ').join('+');
     }
 
-    getClements(order){
-        return new Promise((resolve, reject) =>
-            Clements.find({
-                "Order": order
-            }, function(err, speciesArray) {
-                if (err) {
-                    console.log("Error has occurred  " + err);
-                } else {
-                    clementsArray = speciesArray;
-                    iterations = speciesArray.length;
-                    //keyword.push(clementsArray[i]['Scientific name'].split(' ').join('+'));
-                    clementsArray.forEach(function (obj) {
-                        keyword.push(obj['Scientific name'].split(' ').join('+'))
-                    });
-
-                    resolve(iterations, speciesArray);
-                }
-            })
-        )
+    /**
+     * @name getPhoto
+     * @alias ImageSearch().getPhoto()
+     * @Description Coming Soon!
+     * @method
+     * @methodOf ImageSearch
+     * @memberOf ImageSearch
+     *
+     * @returns stuff
+     * @example let imageSearch = new ImageSearch(JSONObjectFromClementsDB).getPhoto();
+     */
+    getPhoto() {
+        this.search().then((id) =>
+            this.getFlickrPhoto(id).then((imageURL) =>
+                this.getPhotoContents(id).then((flickrJson) =>
+                    this.saveToCloud(imageURL, id).then((imagePath) =>
+                            console.log('Image successfully created at ' + JSON.stringify(imagePath.secure_url) +
+                                ' with FlickrJSON of' + JSON.stringify(flickrJson, null, "\t"))
+                    ))));
     }
 
     /**
@@ -152,7 +164,7 @@ class ImageSearch {
             let options = {
                 "method": "GET",
                 "hostname": url,
-                "path": getImageURL + key + "&photo_id=" + id + "&format=json&nojsoncallback=?"
+                "path": getImageURL + key + "&amp;photo_id=" + id + "&amp;format=json&amp;nojsoncallback=?"
             };
 
             /**
@@ -171,10 +183,11 @@ class ImageSearch {
                 });
 
                 res.on("end", function () {
-
                     let body = Buffer.concat(chunks);
 
                     body = JSON.parse(body);
+
+                    //console.log(body);
 
                     let imageURL = body.sizes.size;
 
@@ -198,57 +211,6 @@ class ImageSearch {
     }
 
     /**
-     * @name getPhoto
-     * @alias ImageSearch().getPhoto()
-     * @Description Coming Soon!
-     * @method
-     * @methodOf ImageSearch
-     * @memberOf ImageSearch
-     *
-     * @returns stuff
-     * @example let imageSearch = new ImageSearch(JSONObjectFromClementsDB).getPhoto();
-     */
-    getPhoto() {
-        let storeKeywords = this.getClements(order).then((iterations, speciesArray) => {
-        });
-
-        if(iterations === -1){
-            console.log('keepALphabetical = '+ keepAlphabetical);
-            storeKeywords.then(()=> this.search(keyword[keepAlphabetical]).then((id) => {
-                    if(id === 5565732642){
-                        console.log('No images returned for:   ' + keyword[keepAlphabetical - 1]);
-                        this.getPhoto();
-                    }
-                    this.getFlickrPhoto(id).then((imageURL) =>
-                        this.getPhotoContents(id).then((flickrJson) =>
-                            this.saveToCloud(imageURL, id, keyword[keepAlphabetical]).then((imagePath) =>
-                                this.saveDataToDB(imagePath, flickrJson, id).then((imageObj) =>  {
-                                        this.getPhoto();
-                                    }
-                                )         )   )   )
-            }
-                   )   )
-
-        } else if(iterations > -1 && iterations > keepAlphabetical ){
-            console.log('inside the else if and iterations = '+ iterations);
-            console.log('keepALphabetical = '+ keepAlphabetical);
-            this.search(keyword[keepAlphabetical]).then((id) => {
-                    if(id === 5565732642){
-                        console.log('No images returned for:   ' + keyword[keepAlphabetical - 1]);
-                        this.getPhoto();
-                    }
-                    this.getFlickrPhoto(id).then((imageURL) =>
-                        this.getPhotoContents(id).then((flickrJson) =>
-                            this.saveToCloud(imageURL, id, keyword[keepAlphabetical]).then((imagePath) =>
-                                this.saveDataToDB(imagePath, flickrJson, id).then((imageObj) =>  {
-                                    this.getPhoto();
-                                    }
-                    )   )   )   )
-            })
-        }
-    }
-
-    /**
      *
      * @name getPhotoContents
      * @alias ImageSearch().getPhotoContents()
@@ -268,7 +230,7 @@ class ImageSearch {
             let options = {
                 "method": "GET",
                 "hostname": url,
-                "path": getInfo + key + "&photo_id=" + id + "&format=json&nojsoncallback=?"
+                "path": getInfo + key + "&amp;photo_id=" + id + "&amp;format=json&amp;nojsoncallback=?"
             };
 
             let req = this.network.request(options, function (res) {
@@ -308,24 +270,18 @@ class ImageSearch {
      * @param {string} imageURL - URL associated to a specific image of a specific size.
      * @param {number} id - d is a number associated to a specific image from flickr and found
      * with ImageSearch().getPhoto()
-     * @param {string} keyword
      * @returns {Promise}
      * @example Coming Soon!
      */
-    saveToCloud(imageURL, id, scientificName){
-        //console.log('saveToCloud');
+    saveToCloud(imageURL, id){
+        console.log('saveToCloud');
         return new Promise((resolve, reject) => {
 
-            let jpgFile = 'flickr/' + order + '/' + clementsArray[keepAlphabetical - 1]['Family name'] + '/' + scientificName + '-' + id;
-            let cloudinaryResult;
-            if(id !== 5565732642){
-                 cloudinaryResult = cloudinary.uploader.upload(imageURL,
-                    function(result) { console.log(result) },
-                    { public_id: jpgFile });
-                console.log('There have been '+ (imagesUploaded + 1) +' images uploaded out of '+ (keepAlphabetical + 1) +' searches performed');
-                resolve(cloudinaryResult, imagesUploaded++);
-            }
+            let jpgFile = this.familyDir + this.keyword + '-' + id;
 
+            let cloudinaryResult = cloudinary.uploader.upload(imageURL,
+                function(result) { console.log(result) },
+                { public_id: jpgFile });
             resolve(cloudinaryResult);
         });
     }
@@ -343,14 +299,14 @@ class ImageSearch {
      * @returns {Promise}
      * @example this.search().then(id)=> Wait for the promise to resolve then move to the next Async call
      */
-    search(scientificName) {
+    search() {
 
         return new Promise((resolve, reject) => {
 
             let options = {
                 "method": "GET",
                 "hostname": url,
-                "path": search + key + "&tags=" + scientificName + "&format=json&nojsoncallback=?"
+                "path": search + key + "&amp;tags=" + this.keyword + "&amp;format=json&amp;nojsoncallback=?"
             };
 
             let req = this.network.request(options, function (res, err) {
@@ -369,16 +325,7 @@ class ImageSearch {
 
                     let body = JSON.parse(Buffer.concat(chunks));
 
-                    //console.log(body);
-                    keepAlphabetical++;
-                    console.log('Inside search and remaining iterations = '+ (iterations - keepAlphabetical));
-
-                    if(body['photos']['photo'][Math.floor(Math.random() * body['photos']['photo'].length)] !== undefined){
-                        resolve(body['photos']['photo'][Math.floor(Math.random() * body['photos']['photo'].length)].id);
-                    }
-                    else{
-                        resolve(5565732642);
-                    }
+                    resolve(body['photos']['photo'][Math.floor(Math.random() * body['photos']['photo'].length)].id);
                 });
             });
 
@@ -392,57 +339,69 @@ class ImageSearch {
     }
 
     /**
-     * @name saveDataToDB
-     * @alias ImageSearch().saveDataToDB()
+     * @name storeFileJSONinfo
+     * @alias ImageSearch().storeFileJSONinfo()
      * @Description Coming Soon!
      * @method
      * @methodOf ImageSearch
      * @memberOf ImageSearch
      *
-     * @param {object} flickrJson - JSON object with data about image of specific id.
-     * @param {object} imagePath - JSON object with cloudinary data about stored image
+     * @param {object} contents - JSON object with data about image of specific id.
      * @returns {Promise}
      * @example Coming Soon!
      */
-    saveDataToDB(imagePath, flickrJson, id) {
+    storeFileJSONinfo(contents) {
 
         return new Promise((resolve, reject) => {
 
-            let imageObj = {};
-
-            if(id !== 5565732642) {
-                imageObj.Order = clementsArray[keepAlphabetical].Order;
-                imageObj.Family = clementsArray[keepAlphabetical]['Family name'];
-                imageObj.CommonFamilyName = clementsArray[keepAlphabetical]['Common family name'];
-                imageObj.ScientificName = clementsArray[keepAlphabetical]['Scientific name'];
-                imageObj.Category = clementsArray[keepAlphabetical].Category;
-                imageObj.EnglishName = clementsArray[keepAlphabetical]['English name'];
-                imageObj.ImagesData = {};
-                imageObj.ImagesData._imageID = mongoose.Types.ObjectId();
-                imageObj.ImagesData.Cropped = 0;
-
-                if(flickrJson['photo']["location"]){
-                    imageObj.ImagesData.HasGeoData = 1;
-                }
-                else {
-                    imageObj.ImagesData.HasGeoData = 0;
-                }
-
-                imageObj.ImagesData.Cloudinary = imagePath;
-                imageObj.ImagesData.FlickrData = flickrJson['photo'];
-
-                goose.collection('images').insert(imageObj);
-
-                console.log('This is the imageObj:   \n' + imageObj);
+            if (!fs.existsSync(dir)){
+                fs.mkdirSync(dir);
             }
-            resolve(imageObj);
-        })
+
+            let imageJSON = dir + this.keyword + '-' + contents['photo'].id + this.jsonExt;
+
+            if(fs.existsSync(imageJSON)){
+
+                contents = JSON.stringify(contents, null, "\t");
+
+                fs.writeFileSync(imageJSON, contents, 'utf-8');
+
+
+            } else {
+
+                contents = JSON.stringify(contents, null, "\t");
+
+                fs.writeFileSync(imageJSON, contents, 'utf-8');
+
+            }
+
+            resolve(imageJSON)
+        });
     }
+
+
 }
 
-module.exports = ImageSearch;
+module.exports = ImageSearch;</code></pre>
+        </article>
+    </section>
 
-let imageSearch = new ImageSearch();
 
-imageSearch.getPhoto();
 
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ImageSearch.html">ImageSearch</a></li></ul><h3>Namespaces</h3><ul><li><a href="image-search.html">image-search</a></li></ul><h3>Global</h3><ul><li><a href="global.html">options</a></li><li><a href="global.html#sizeOfImage">sizeOfImage</a></li><li><a href="global.html#url">url</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Apr 19 2017 00:00:48 GMT-0600 (MDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

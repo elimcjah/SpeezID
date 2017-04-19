@@ -1,14 +1,23 @@
+'use strict';
+
 let mongoose = require('mongoose');
-exports.imageList = function imageList(imgname, callback) {
-    let Image = mongoose.model('Images');
-    Image.find({
-        'Images': imgname
-    }, function(err, images) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(images);
-            callback("", images);
-        }
-    });
-};
+let ObjectId = mongoose.Schema.Types.ObjectId;
+
+var nestedDoc = new mongoose.Schema({
+    _imageID: ObjectId,
+    Cropped: { type: Boolean, default: 0 },
+    HasGeoData: { type: Boolean, default: 0 },
+    Cloudinary: Object,
+    FlickrData: Object
+});
+let imagesSchema = new mongoose.Schema({
+    Order: String,
+    Family: String,
+    CommonFamilyName: String,
+    ScientificName: String,
+    Category: String,
+    EnglishName: String,
+    ImagesData: [ nestedDoc ]
+});
+
+module.exports = mongoose.model('Images', imagesSchema);

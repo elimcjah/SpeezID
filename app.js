@@ -9,13 +9,13 @@ let mongodb = require('mongodb');
 let mongoose = require('mongoose');
 let cloudinary = require('cloudinary');
 
-let dbImages = require('./model/db-images');
-let ebirdClements = require('./model/clements');
+let Images = require('./model/images');
+let Clements = require('./model/clements');
 
 let index = require('./routes/index');
 let users = require('./routes/users');
 let searchFlickr = require('./routes/search-flickr');
-let imageCrop = require('./routes/image-crop');
+let crop = require('./routes/crop');
 
 let app = express();
 
@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/search-flickr', searchFlickr);
-app.use('/image-crop', imageCrop);
+app.use('/crop', crop);
 
 cloudinary.config({
     cloud_name: 'elijahs',

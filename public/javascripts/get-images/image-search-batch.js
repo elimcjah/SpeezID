@@ -2,10 +2,6 @@ let mongoose = require('mongoose');
 
 let ImageSearch = require('./image-search');
 
-// let Species = new require('../../../model/species');
-
-// let clementsList
-
 let Clements = new require('../../../model/clements.js');
 
 mongoose.connect('mongodb://localhost:27017/speezid');
