@@ -1,4 +1,5 @@
 let express = require('express');
+let http = require('http');
 let path = require('path');
 let favicon = require('serve-favicon');
 let logger = require('morgan');
@@ -6,9 +7,10 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let mongodb = require('mongodb');
 let mongoose = require('mongoose');
+let cloudinary = require('cloudinary');
 
-// mongoose.connect('mongodb://localhost:27017/');
-// let db = mongoose.connection;
+let dbImages = require('./model/db-images');
+let ebirdClements = require('./model/clements');
 
 let index = require('./routes/index');
 let users = require('./routes/users');
@@ -39,6 +41,12 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/search-flickr', searchFlickr);
 app.use('/image-crop', imageCrop);
+
+cloudinary.config({
+    cloud_name: 'elijahs',
+    api_key: '263371231383956',
+    api_secret: 'Ef8mZYvcc_LWY48a1VOVKmcWd4Y'
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
