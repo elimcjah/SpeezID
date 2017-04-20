@@ -1,8 +1,48 @@
 extends layout
 
+
 block content
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='x-ua-compatible', content='ie=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title SpeezID
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js')
+    script.
+        window.addEventListener('DOMContentLoaded', function () {
+            var images = document.querySelectorAll('#image');
+            var length = images.length;
+            var croppers = [];
+            var i;
+            for (i = 0; i < length; i++) {
+                croppers.push(new Cropper(images[i], {}));
+            }
+        });
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.ajax({
+                    url: "/get-image", success: function (result) {
+                        $("#div1").html(result);
+                    }
+                });
+            });
+        });
+    link(href='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.css', rel='stylesheet')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.js')
+    //script.
+    //    window.addEventListener('DOMContentLoaded', function () {
+    //        var images = document.querySelectorAll('#image');
+    //        var length = images.length;
+    //        var croppers = [];
+    //        var i;
+    //        for (i = 0; i < length; i++) {
+    //            croppers.push(new Cropper(images[i], {}));
+    //        }
+    //    });
   h1= title
   section.get
     .container-fluid
-    p This page will have the users cropping images to be given to Watson.
-    a(href='/get-image') LOAD DATA
+      #div1(style='width:500px;height:500px')
+        img(id='image' src='https://res.cloudinary.com/elijahs/image/upload/v1492643031/flickr/Galliformes/Megapodiidae/Aepypodius%2Barfakianus-15433787510.jpg', alt='Aepypodius Barfakianus')
+      button Get External Content
+

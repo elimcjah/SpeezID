@@ -5,8 +5,10 @@ let ObjectId = mongoose.Schema.Types.ObjectId;
 
 let nestedDoc = new mongoose.Schema({
     _imageID: ObjectId,
-    Cropped: { type: Boolean, default: 0 },
-    HasGeoData: { type: Boolean, default: 0 },
+    VerifiedBird: { type: Boolean, default: false },
+    FlaggedAsNonBird: Number,
+    Cropped: { type: Boolean, default: false },
+    HasGeoData: { type: Boolean, default: false },
     Cloudinary: Object,
     FlickrData: Object
 });

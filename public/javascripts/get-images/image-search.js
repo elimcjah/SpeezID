@@ -353,7 +353,6 @@ class ImageSearch {
                 "path": search + key + "&tags=" + scientificName + "&format=json&nojsoncallback=?"
             };
 
-            console.log()
 
             let req = this.network.request(options, function (res, err) {
 
@@ -421,6 +420,8 @@ class ImageSearch {
                 imageObj.EnglishName = clementsArray[keepAlphabetical]['English name'];
                 imageObj.ImagesData = {};
                 imageObj.ImagesData._imageID = mongoose.Types.ObjectId();
+                imageObj.ImagesData.VerifiedBird = false;
+                imageObj.ImagesData.FlaggedAsNonBird = 0;
                 imageObj.ImagesData.Cropped = false;
 
                 if(flickrJson['photo']["location"]){

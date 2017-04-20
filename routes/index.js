@@ -23,11 +23,13 @@ router.get('/get-image', function(req, res, next) {
         if(err){
           res.send('err has occurred')
         } else {
-          let imageToDisplay = JSON.stringify(imageData);
-          imageToDisplay = imageData.ImagesData[0].Cloudinary.public_id;
-           let displayThis = cloudinary.image(imageToDisplay, { width: 100, height: 150, crop: "fill" })
-          console.log(imageToDisplay);
-          res.render("crop", displayThis);
+
+          let imageToDisplay = imageData.ImagesData[0].Cloudinary.public_id;
+          let displayThis = cloudinary.image(imageToDisplay);
+          console.log(displayThis);
+          console.log(typeof  displayThis);
+          displayThis = displayThis.slice(0, 5) + ' id="image" ' + displayThis.slice(5);
+                res.send(displayThis);
         }
       })
 
