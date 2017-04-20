@@ -2,5 +2,7 @@ extends layout
 
 block content
   h1= title
-  p This page will have the users cropping images to be given to Watson.
-  img
+  section.get
+    .container-fluid
+    p This page will have the users cropping images to be given to Watson.
+    a(href='/get-image') LOAD DATA

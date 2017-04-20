@@ -3,7 +3,7 @@
 let mongoose = require('mongoose');
 let ObjectId = mongoose.Schema.Types.ObjectId;
 
-var nestedDoc = new mongoose.Schema({
+let nestedDoc = new mongoose.Schema({
     _imageID: ObjectId,
     Cropped: { type: Boolean, default: 0 },
     HasGeoData: { type: Boolean, default: 0 },

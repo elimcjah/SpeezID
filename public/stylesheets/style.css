@@ -6,6 +6,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
+@import url(crop.css);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
