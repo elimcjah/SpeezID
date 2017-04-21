@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 //let Clements = new require('./clements.js');
-mongoose.connect('mongodb://localhost:27017/speezid');
+mongoose.connect(process.env.DB_URL);
 
 let clementsList = (orderName) => {
     let Clements = new require('./clements');

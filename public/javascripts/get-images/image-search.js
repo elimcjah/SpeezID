@@ -41,14 +41,14 @@ const url         = 'api.flickr.com';
 const Clements = new require('../../../model/clements.js');
 const Image = new require('../../../model/images.js');
 
-mongoose.connect('mongodb://localhost:27017/speezid');
+mongoose.connect(process.env.DB_URL);
 
 const goose = mongoose.connection;
 
 cloudinary.config({
-    cloud_name: 'elijahs',
-    api_key: '263371231383956',
-    api_secret: 'Ef8mZYvcc_LWY48a1VOVKmcWd4Y'
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET
 });
 
 let order = 'Galliformes';

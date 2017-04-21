@@ -5,7 +5,9 @@ let cloudinary = require('cloudinary');
 
 const Image = new require('../model/images.js');
 
-mongoose.connect('mongodb://localhost:27017/speezid');
+require('dotenv').config();
+
+mongoose.connect(process.env.DB_URL);
 mongoose.set('debug', true);
 
 /* GET home page. */

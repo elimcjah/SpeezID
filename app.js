@@ -1,3 +1,4 @@
+let dotenv = require('dotenv');
 let express = require('express');
 let http = require('http');
 let path = require('path');
@@ -18,6 +19,8 @@ let searchFlickr = require('./routes/search-flickr');
 let crop = require('./routes/crop');
 
 let app = express();
+
+require('dotenv').config();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,10 +45,12 @@ app.use('/users', users);
 app.use('/search-flickr', searchFlickr);
 app.use('/crop', crop);
 
+
+
 cloudinary.config({
-    cloud_name: 'elijahs',
-    api_key: '263371231383956',
-    api_secret: 'Ef8mZYvcc_LWY48a1VOVKmcWd4Y'
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET
 });
 
 // catch 404 and forward to error handler
