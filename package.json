@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "run-one-flickr": "nodemon ./public/javascripts/get-images/image-search.js",
-    "run-many-flickr": "nodemon ./public/javascripts/get-images/image-search-batch.js"
+    "start": "node ./bin/www",
+    "run-one-flickr": "node ./public/javascripts/get-images/image-search.js",
+    "run-many-flickr": "node ./public/javascripts/get-images/image-search-batch.js"
   },
   "dependencies": {
     "assert": "^1.4.1",
