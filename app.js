@@ -20,6 +20,8 @@ let crop = require('./routes/crop');
 
 let app = express();
 
+
+// Configure dotenv
 require('dotenv').config();
 
 // view engine setup
