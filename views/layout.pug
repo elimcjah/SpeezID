@@ -2,7 +2,75 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+    link(href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/readable/bootstrap.min.css", rel="stylesheet", integrity="sha384-Li5uVfY2bSkD3WQyiHX8tJd0aMF91rMrQP5aAewFkHkVSTT2TmD2PehZeMmm7aiL", crossorigin="anonymous")
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+    script(src='https://code.jquery.com/jquery-3.1.1.min.js',
+    integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=',
+    crossorigin='anonymous')
+    style.
+      #login-dp {
+        min-width: 250px;
+        padding: 14px 14px 0;
+        overflow: hidden;
+        background-color: rgba(255, 255, 255, .8);
+      }
+
+      #login-dp .help-block {
+        font-size: 12px
+      }
+
+      #login-dp .bottom {
+        background-color: rgba(255, 255, 255, .8);
+        border-top: 1px solid #ddd;
+        clear: both;
+        padding: 14px;
+      }
+
+      #login-dp .social-buttons {
+        margin: 12px 0
+      }
+
+      #login-dp .social-buttons a {
+        width: 49%;
+      }
+
+      #login-dp .form-group {
+        margin-bottom: 10px;
+      }
+
+      .btn-fb {
+        color: #fff;
+        background-color: #3b5998;
+      }
+
+      .btn-fb:hover {
+        color: #fff;
+        background-color: #496ebc
+      }
+
+      .btn-tw {
+        color: #fff;
+        background-color: #55acee;
+      }
+
+      .btn-tw:hover {
+        color: #fff;
+        background-color: #59b5fa;
+      }
+
+      @media (max-width: 768px) {
+        #login-dp {
+          background-color: inherit;
+          color: #fff;
+        }
+
+        #login-dp .bottom {
+          background-color: inherit;
+          border-top: 0 none;
+        }
+      }
+
   body
     block content
   footer

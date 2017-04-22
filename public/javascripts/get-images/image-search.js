@@ -41,6 +41,8 @@ const url         = 'api.flickr.com';
 const Clements = new require('../../../model/clements.js');
 const Image = new require('../../../model/images.js');
 
+require('dotenv').config();
+
 mongoose.connect(process.env.DB_URL);
 
 const goose = mongoose.connection;
