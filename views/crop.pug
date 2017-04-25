@@ -12,16 +12,16 @@ block content
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js')
     script.
         window.addEventListener('DOMContentLoaded', function () {
-            var images = document.querySelectorAll('#image');
-            var length = images.length;
-            var croppers = [];
-            var i;
-            for (i = 0; i < length; i++) {
-                croppers.push(new Cropper(images[i], {}));
+            let images = document.querySelectorAll('#image');
+            let length = images.length;
+            let croppers = [];
+            for (let i = 0; i < length; i++) {
+                let croppedImage = new Cropper(images[i], {});
+                croppers.push(croppedImage);
             }
         });
         $(document).ready(function () {
-            $("button").click(function () {
+            $("button#3").click(function () {
                 $.ajax({
                     url: "/get-image", success: function (result) {
                         $("#div1").html(result);
@@ -36,5 +36,10 @@ block content
         img(id='image' src='https://res.cloudinary.com' +
         '/elijahs/image/upload/v1492643031/flickr/Galliformes/Megapodiidae/Aepypodius%2Barfakianus-15433787510.jpg',
         alt='Aepypodius Barfakianus')
-      button Get External Content
+      button#1 Finished Cropping
+      br
+      button Image doesn't have a bird
+      br
+      button#3 Get a new image
+
 

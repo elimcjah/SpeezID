@@ -3,7 +3,7 @@
   "version": "v0.22.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nodemon ./bin/www",
     "run-one-flickr": "node ./public/javascripts/get-images/image-search.js",
     "run-many-flickr": "node ./public/javascripts/get-images/image-search-batch.js"
   },
