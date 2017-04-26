@@ -69,6 +69,7 @@ let imagesUploaded = 0;
  * @TODO make more efficient how to deal with no result for id.
  * @TODO make sure that a return of 5565732642 really does mean that there was no image for those keywords
  * @TODO clean up the code.
+ * @TODO if Images.ScientificName exists then Add Image Data to existing object.
  */
 
 class ImageSearch {
@@ -174,15 +175,20 @@ class ImageSearch {
 
                 res.on("end", function () {
 
+                    /**@type {Buffer} Using Node Core HTTP module returns chunks to be Buffered into body string*/
                     let body = Buffer.concat(chunks);
 
+                    /** parse body into object */
                     body = JSON.parse(body);
 
+                    /** Initially called image URL returns object of JSON data about the image incl. URL */
                     let imageURL = body.sizes.size;
 
+                    /** reduce imageURL to return value for the property equal to the size of image set earlier */
                     imageURL = imageURL.filter(function( obj ) {
                         return obj.label === sizeOfImage;
                     });
+
 
                     imageURL = imageURL[0]['source'];
 
@@ -413,7 +419,13 @@ class ImageSearch {
 
             let imageObj = {};
 
-            if(id !== 5565732642) {
+            if (id === 5565732642) {
+                imageObj = {error: 'That is a whale and not a bird or a fish. Its a mammal. '};
+                resolve(imageObj);
+            }
+
+
+            if (id !== 5565732642) {
                 imageObj.Order = clementsArray[keepAlphabetical].Order;
                 imageObj.Family = clementsArray[keepAlphabetical]['Family name'];
                 imageObj.CommonFamilyName = clementsArray[keepAlphabetical]['Common family name'];
@@ -426,22 +438,39 @@ class ImageSearch {
                 imageObj.ImagesData.FlaggedAsNonBird = 0;
                 imageObj.ImagesData.Cropped = false;
 
-                if(flickrJson['photo']["location"]){
+                if (flickrJson['photo']["location"]) {
                     imageObj.ImagesData.HasGeoData = true;
                 }
                 else {
                     imageObj.ImagesData.HasGeoData = false;
                 }
-
                 imageObj.ImagesData.Cloudinary = imagePath;
                 imageObj.ImagesData.FlickrData = flickrJson['photo'];
 
-                goose.collection('images').insert(imageObj);
+                //     var query = {
+                //         Order: imageObj.Order,
+                //         Family: imageObj.Family,
+                //         CommonFamilyName: imageObj.CommonFamilyName,
+                //         ScientificName: imageObj.ScientificName,
+                //         Category: imageObj.Category,
+                //         EnglishName: imageObj.EnglishName
+                //     }
+                //        // update = { ImagesData[ImagesData.length] = imageObj.ImagesData },
+                //       //  options = { upsert: true, new: true};
+                //
+                //     Image.findOneAndUpdate(query, update, options, function(error, result) {
+                //         if (error) return;
+                //
+                //     console.log('This is the imageObj:   \n' + imageObj);
+                // });
 
-                console.log('This is the imageObj:   \n' + imageObj);
+                /**
+                 * @TODO db.images.insert or similar was here before I started messing with the code.
+                 */
             }
+
             resolve(imageObj);
-        })
+        });
     }
 }
 

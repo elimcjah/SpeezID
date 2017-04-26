@@ -1,13 +1,314 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="/public/stylesheets/crop.css">
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Help teach artificial intelligence to recognize bird species.">
+    <meta name="keywords" content="identify bird, bird id, bird identification, bird, aves, bird manual, bird taxonomy">
+    <meta name="author" content="Elijah McClendon">
+    <title>SpeezID</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.css">
+    <link rel="stylesheet" href="../public/stylesheets/cropperjs.css">
 </head>
 <body>
- <div class="container">
-     <img src="http://res.cloudinary.com/elijahs/image/upload/v1492602636/flickr/Galliformes/Odontophoridae/Callipepla%2Bcalifornica-6701236775.jpg">
- </div>
+<!--[if lt IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Header -->
+
+<!-- Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <!-- <h3>Demo:</h3> -->
+            <div class="img-container">
+                <img src="https://res.cloudinary.com/elijahs/image/upload/v1492643031/flickr/Galliformes/Megapodiidae/Aepypodius%2Barfakianus-15433787510.jpg" alt='Bird Photo'>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="actions">
+        <div class="col-md-9 docs-buttons">
+            <!-- <h3>Toolbar:</h3> -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="setDragMode" data-option="move" title="Move">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.setDragMode(&quot;move&quot;)">
+              <span class="fa fa-arrows"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="setDragMode" data-option="crop" title="Crop">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.setDragMode(&quot;crop&quot;)">
+              <span class="fa fa-crop"></span>
+            </span>
+                </button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(0.1)">
+              <span class="fa fa-search-plus"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(-0.1)">
+              <span class="fa fa-search-minus"></span>
+            </span>
+                </button>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="move" data-option="-10" data-second-option="0" title="Move Left">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(-10, 0)">
+              <span class="fa fa-arrow-left"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="move" data-option="10" data-second-option="0" title="Move Right">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(10, 0)">
+              <span class="fa fa-arrow-right"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="-10" title="Move Up">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, -10)">
+              <span class="fa fa-arrow-up"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="10" title="Move Down">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, 10)">
+              <span class="fa fa-arrow-down"></span>
+            </span>
+                </button>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">
+              <span class="fa fa-rotate-left"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">
+              <span class="fa fa-rotate-right"></span>
+            </span>
+                </button>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">
+              <span class="fa fa-arrows-h"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">
+              <span class="fa fa-arrows-v"></span>
+            </span>
+                </button>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="crop" title="Crop">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">
+              <span class="fa fa-check"></span>
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="clear" title="Clear">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">
+              <span class="fa fa-remove"></span>
+            </span>
+                </button>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="reset" title="Reset">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="cropper.reset()">
+                        <span class="fa fa-refresh">
+                    </span>
+                </span>
+                </button>
+                <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                    <input type="file" class="sr-only" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="Import image with Blob URLs">
+              <span class="fa fa-upload"></span>
+            </span>
+                </label>
+            </div>
+
+            <div class="btn-group btn-group-crop">
+                <button type="button" class="btn btn-primary" data-method="getCroppedCanvas">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getCroppedCanvas()">
+              Get Cropped Canvas
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 160, &quot;height&quot;: 90 }">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getCroppedCanvas({ width: 160, height: 90 })">
+              160&times;90
+            </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 320, &quot;height&quot;: 180 }">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getCroppedCanvas({ width: 320, height: 180 })">
+              320&times;180
+            </span>
+                </button>
+            </div>
+
+            <!-- Show the cropped image in modal -->
+            <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="getCroppedCanvasTitle">Cropped</h4>
+                        </div>
+                        <div class="modal-body"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal -->
+
+        </div><!-- /.docs-buttons -->
+
+        <div class="col-md-3 docs-toggles">
+
+            <div class="dropdown dropup docs-options">
+                <button type="button" class="btn btn-primary btn-block dropdown-toggle" id="toggleOptions" data-toggle="dropdown" aria-expanded="true">
+                    Toggle Options
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="toggleOptions">
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="responsive" checked>
+                            responsive
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="restore" checked>
+                            restore
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="checkCrossOrigin" checked>
+                            checkCrossOrigin
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="checkOrientation" checked>
+                            checkOrientation
+                        </label>
+                    </li>
+
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="modal" checked>
+                            modal
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="guides" checked>
+                            guides
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="center" checked>
+                            center
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="highlight" checked>
+                            highlight
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="background" checked>
+                            background
+                        </label>
+                    </li>
+
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="autoCrop" checked>
+                            autoCrop
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="movable" checked>
+                            movable
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="rotatable" checked>
+                            rotatable
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="scalable" checked>
+                            scalable
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="zoomable" checked>
+                            zoomable
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="zoomOnTouch" checked>
+                            zoomOnTouch
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="zoomOnWheel" checked>
+                            zoomOnWheel
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="cropBoxMovable" checked>
+                            cropBoxMovable
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="cropBoxResizable" checked>
+                            cropBoxResizable
+                        </label>
+                    </li>
+                    <li role="presentation">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="toggleDragModeOnDblclick" checked>
+                            toggleDragModeOnDblclick
+                        </label>
+                    </li>
+                </ul>
+            </div><!-- /.dropdown -->
+        </div><!-- /.docs-toggles -->
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.js"></script>
+<script src="../public/javascripts/cropperjs.js"></script>
 </body>
 </html>

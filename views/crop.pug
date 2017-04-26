@@ -3,43 +3,7 @@ extends layout
 
 block content
   head
-    meta(charset='utf-8')
-    meta(http-equiv='x-ua-compatible', content='ie=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    title SpeezID
-    link(href='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.css', rel='stylesheet')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.js')
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js')
-    script.
-        window.addEventListener('DOMContentLoaded', function () {
-            let images = document.querySelectorAll('#image');
-            let length = images.length;
-            let croppers = [];
-            for (let i = 0; i < length; i++) {
-                let croppedImage = new Cropper(images[i], {});
-                croppers.push(croppedImage);
-            }
-        });
-        $(document).ready(function () {
-            $("button#3").click(function () {
-                $.ajax({
-                    url: "/get-image", success: function (result) {
-                        $("#div1").html(result);
-                    }
-                });
-            });
-        });
-  h1= title
-  section.get
-    .container-fluid
-      #div1(style='width:500px;height:500px')
-        img(id='image' src='https://res.cloudinary.com' +
-        '/elijahs/image/upload/v1492643031/flickr/Galliformes/Megapodiidae/Aepypodius%2Barfakianus-15433787510.jpg',
-        alt='Aepypodius Barfakianus')
-      button#1 Finished Cropping
-      br
-      button Image doesn't have a bird
-      br
-      button#3 Get a new image
-
+  body
+    include navbar.pug
+    include cropper.pug
 

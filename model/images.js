@@ -10,7 +10,8 @@ let nestedDoc = new mongoose.Schema({
     Cropped: { type: Boolean, default: false },
     HasGeoData: { type: Boolean, default: false },
     Cloudinary: Object,
-    FlickrData: Object
+    FlickrData: Object,
+    CroppedData: Object
 });
 let imagesSchema = new mongoose.Schema({
     Order: String,

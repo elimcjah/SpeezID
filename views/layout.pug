@@ -1,77 +1,30 @@
 doctype html
 html
   head
-    title= title
+    meta(charset='utf-8')
+    meta(http-equiv='x-ua-compatible', content='ie=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='Help teach artificial intelligence to recognize bird species.')
+    meta(name='keywords', content='identify bird, bird id, bird identification, bird, aves, bird manual, bird taxonomy')
+    meta(name='author', content='Elijah McClendon')
+    title SpeezID
     script(src='https://code.jquery.com/jquery-3.1.1.min.js',
     integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=',
     crossorigin='anonymous')
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
-    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
+    script(src='https://code.jquery.com/jquery-3.1.1.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.js')
+    script(src='/javascripts/cropperjs.js')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.min.css')
+    //link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.css')
+    link(rel='stylesheet', href='/stylesheets/cropperjs.css')
+    //link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     link(href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/readable/bootstrap.min.css", rel="stylesheet", integrity="sha384-Li5uVfY2bSkD3WQyiHX8tJd0aMF91rMrQP5aAewFkHkVSTT2TmD2PehZeMmm7aiL", crossorigin="anonymous")
-    style.
-      #login-dp {
-        min-width: 250px;
-        padding: 14px 14px 0;
-        overflow: hidden;
-        background-color: rgba(255, 255, 255, .8);
-      }
-
-      #login-dp .help-block {
-        font-size: 12px
-      }
-
-      #login-dp .bottom {
-        background-color: rgba(255, 255, 255, .8);
-        border-top: 1px solid #ddd;
-        clear: both;
-        padding: 14px;
-      }
-
-      #login-dp .social-buttons {
-        margin: 12px 0
-      }
-
-      #login-dp .social-buttons a {
-        width: 49%;
-      }
-
-      #login-dp .form-group {
-        margin-bottom: 10px;
-      }
-
-      .btn-fb {
-        color: #fff;
-        background-color: #3b5998;
-      }
-
-      .btn-fb:hover {
-        color: #fff;
-        background-color: #496ebc
-      }
-
-      .btn-tw {
-        color: #fff;
-        background-color: #55acee;
-      }
-
-      .btn-tw:hover {
-        color: #fff;
-        background-color: #59b5fa;
-      }
-
-      @media (max-width: 768px) {
-        #login-dp {
-          background-color: inherit;
-          color: #fff;
-        }
-
-        #login-dp .bottom {
-          background-color: inherit;
-          border-top: 0 none;
-        }
-      }
-
+    link(rel='stylesheet', href='/stylesheets/login-dropdown.css')
   body
     block content
   footer

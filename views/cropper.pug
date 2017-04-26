@@ -1,0 +1,152 @@
+.container
+  .row
+    .col-md-9
+      .img-container
+        img(src='https://res.cloudinary.com/elijahs/image/upload/v1492643031/flickr/Galliformes/Megapodiidae/Aepypodius%2Barfakianus-15433787510.jpg', alt='Bird Photo')
+  #actions.row
+    .col-md-9.docs-buttons
+      .btn-group
+        button.btn.btn-primary(type='button', data-method='setDragMode', data-option='move', title='Move')
+          span.docs-tooltip(data-toggle='tooltip', title='cropper.setDragMode("move")')
+            span.fa.fa-arrows
+        |
+        button.btn.btn-primary(type='button', data-method='setDragMode', data-option='crop', title='Crop')
+          span.docs-tooltip(data-toggle='tooltip', title='cropper.setDragMode("crop")')
+            span.fa.fa-crop
+      .btn-group
+        button.btn.btn-primary(type='button', data-method='zoom', data-option='0.1', title='Zoom In')
+          span.docs-tooltip(data-toggle='tooltip', title='cropper.zoom(0.1)')
+            span.fa.fa-search-plus
+        |
+        button.btn.btn-primary(type='button', data-method='zoom', data-option='-0.1', title='Zoom Out')
+          span.docs-tooltip(data-toggle='tooltip', title='cropper.zoom(-0.1)')
+            span.fa.fa-search-minus
+      .btn-group
+        button.btn.btn-primary(type='button', data-method='move', data-option='-10', data-second-option='0', title='Move Left')
+          span.docs-tooltip(data-toggle='tooltip', title='cropper.move(-10, 0)')
+            span.fa.fa-arrow-left
+        |
+        button.btn.btn-primary(type='button', data-method='move', data-option='10', data-second-option='0', title='Move Right')
+          span.docs-tooltip(data-toggle='tooltip', title='cropper.move(10, 0)')
+            span.fa.fa-arrow-right
+        |
+        button.btn.btn-primary(type='button', data-method='move', data-option='0', data-second-option='-10', title='Move Up')
+          span.docs-tooltip(data-toggle='tooltip', title='cropper.move(0, -10)')
+            span.fa.fa-arrow-up
+        |
+        button.btn.btn-primary(type='button', data-method='move', data-option='0', data-second-option='10', title='Move Down')
+          span.docs-tooltip(data-toggle='tooltip', title='cropper.move(0, 10)')
+            span.fa.fa-arrow-down
+      .btn-group
+        button.btn.btn-primary(type='button', data-method='rotate', data-option='-45', title='Rotate Left')
+          span.docs-tooltip(data-toggle='tooltip', title='cropper.rotate(-45)')
+            span.fa.fa-rotate-left
+        |
+        button.btn.btn-primary(type='button', data-method='rotate', data-option='45', title='Rotate Right')
+          span.docs-tooltip(data-toggle='tooltip', title='cropper.rotate(45)')
+            span.fa.fa-rotate-right
+      .btn-group
+        button.btn.btn-primary(type='button', data-method='scaleX', data-option='-1', title='Flip Horizontal')
+          span.docs-tooltip(data-toggle='tooltip', title='cropper.scaleX(-1)')
+            span.fa.fa-arrows-h
+        |
+        button.btn.btn-primary(type='button', data-method='scaleY', data-option='-1', title='Flip Vertical')
+          span.docs-tooltip(data-toggle='tooltip', title='cropper.scaleY(-1)')
+            span.fa.fa-arrows-v
+      .col-md-3.docs-toggles
+        .dropdown.dropup.docs-options
+          button#toggleOptions.btn.btn-primary.btn-block.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='true')
+            | Toggle Options
+            span.caret
+          ul.dropdown-menu(role='menu', aria-labelledby='toggleOptions')
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='responsive', checked='')
+                |  responsive
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='restore', checked='')
+                |  restore
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='checkCrossOrigin', checked='')
+                |  checkCrossOrigin
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='checkOrientation', checked='')
+                |  checkOrientation
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='modal', checked='')
+                |  modal
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='guides', checked='')
+                |  guides
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='center', checked='')
+                |  center
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='highlight', checked='')
+                |  highlight
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='background', checked='')
+                |  background
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='autoCrop', checked='')
+                |  autoCrop
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='movable', checked='')
+                |  movable
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='rotatable', checked='')
+                |  rotatable
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='scalable', checked='')
+                |  scalable
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='zoomable', checked='')
+                |  zoomable
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='zoomOnTouch', checked='')
+                |  zoomOnTouch
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='zoomOnWheel', checked='')
+                |  zoomOnWheel
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='cropBoxMovable', checked='')
+                |  cropBoxMovable
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='cropBoxResizable', checked='')
+                |  cropBoxResizable
+            li(role='presentation')
+              label.checkbox-inline
+                input(type='checkbox', name='toggleDragModeOnDblclick', checked='')
+                |  toggleDragModeOnDblclick
+      .btn-group.btn-group-crop
+        button.btn.btn-primary(type='button', data-method='getCroppedCanvas')
+          span.docs-tooltip(data-toggle='tooltip', title='cropper.getCroppedCanvas()') Finished Cropping
+        |
+      #getCroppedCanvasModal.modal.fade.docs-cropped(role='dialog', aria-hidden='true', aria-labelledby='getCroppedCanvasTitle', tabindex='-1')
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
+              h4#getCroppedCanvasTitle.modal-title Cropped
+            .modal-body
+            .modal-footer
+              button.btn.btn-default(type='button', data-dismiss='modal') Close
+              |
+              a#download.btn.btn-primary(href='javascript:void(0);', download='cropped.jpg') Download

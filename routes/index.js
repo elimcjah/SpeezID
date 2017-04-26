@@ -16,6 +16,10 @@ router.get('/', function(req, res, next) {
 });
 
 /**
+ * @TODO have image sent to crop page onload also have crop page return a new image or ten and have them in state
+ */
+
+/**
  *  Get Images
  */
 router.get('/get-image', function(req, res, next) {
@@ -34,7 +38,6 @@ router.get('/get-image', function(req, res, next) {
                 res.send(displayThis);
         }
       })
-
 });
 
 
