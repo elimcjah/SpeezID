@@ -9,25 +9,25 @@
   },
   "dependencies": {
     "assert": "^1.4.1",
-    "body-parser": "~1.16.0",
+    "body-parser": "^1.17.1",
     "cloudinary": "^1.8.0",
     "cookie-parser": "~1.4.3",
     "cropperjs": "^1.0.0-rc",
     "csvtojson": "^1.1.4",
     "debug": "~2.6.0",
     "dotenv": "^4.0.0",
-    "express": "~4.14.1",
+    "express": "^4.15.2",
     "global": "^4.3.2",
     "jasmine": "^2.6.0",
     "jsdoc": "^3.4.3",
     "mongodb": "^2.2.25",
     "mongoose": "^4.9.5",
-    "morgan": "~1.7.0",
+    "morgan": "^1.8.1",
     "node-sass": "^4.5.2",
     "node-sass-middleware": "^0.11.0",
     "nodemon": "^1.11.0",
     "pug": "~2.0.0-beta10",
     "request": "^2.81.0",
-    "serve-favicon": "~2.3.2"
+    "serve-favicon": "^2.4.2"
   }
 }
