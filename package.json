@@ -1,6 +1,15 @@
 {
   "name": "speezid",
-  "version": "v0.22.0",
+  "version": "v0.3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elimcjah/SpeezID.git"
+  },
+  "author": {
+    "name": "Elijah McClendon",
+    "email": "elijah@davinciinstitute.com",
+    "url": "http://elimcjah.com"
+  },
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
@@ -13,13 +22,9 @@
     "cloudinary": "^1.8.0",
     "cookie-parser": "~1.4.3",
     "cropperjs": "^1.0.0-rc",
-    "csvtojson": "^1.1.4",
-    "debug": "~2.6.0",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "global": "^4.3.2",
-    "jasmine": "^2.6.0",
-    "jsdoc": "^3.4.3",
     "mongodb": "^2.2.25",
     "mongoose": "^4.9.5",
     "morgan": "^1.8.1",
@@ -29,5 +34,11 @@
     "pug": "~2.0.0-beta10",
     "request": "^2.81.0",
     "serve-favicon": "^2.4.2"
+  },
+  "devDependencies": {
+    "debug": "~2.6.0",
+    "csvtojson": "^1.1.4",
+    "jasmine": "^2.6.0",
+    "jsdoc": "^3.4.3"
   }
 }
