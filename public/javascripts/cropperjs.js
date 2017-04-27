@@ -22,7 +22,26 @@ window.onload = function () {
         },
         zoom: function (e) {
             console.log(e.type, e.detail.ratio);
-        }
+        },
+        responsive: true, //default is true
+        restore: true, //default is true
+        checkCrossOrigin: true, //default is true
+        checkOrientation: true, //default is true
+        modal: true, //default is true
+        guides: true, //default is true
+        center: true, //default is true
+        highlight: true, //default is true
+        background: true, //default is true
+        autoCrop: true, //default is true
+        movable: true, //default is true
+        rotatable: true, //default is true
+        scalable: true, //default is true
+        zoomable: true, //default is true
+        zoomOnTouch: true, //default is true
+        zoomOnWheel: true, //default is true
+        cropBoxMovable: true, //default is true
+        cropBoxResizable: true, //default is true
+        toggleDragModeOnDblclick: true, //default is true
     };
     let cropper = new Cropper(image, options);
     let originalImageURL = image.src;
@@ -42,55 +61,10 @@ window.onload = function () {
         $('button[data-method="scale"]').prop('disabled', true);
     }
 
-
     // Download
     if (typeof download.download === 'undefined') {
         download.className += ' disabled';
     }
-
-
-    // Options
-    actions.querySelector('.docs-toggles').onchange = function (event) {
-        let e = event || window.event;
-        let target = e.target || e.srcElement;
-        let cropBoxData;
-        let canvasData;
-        let isCheckbox;
-        let isRadio;
-
-        if (!cropper) {
-            return;
-        }
-
-        if (target.tagName.toLowerCase() === 'label') {
-            target = target.querySelector('input');
-        }
-
-        isCheckbox = target.type === 'checkbox';
-        isRadio = target.type === 'radio';
-
-        if (isCheckbox || isRadio) {
-            if (isCheckbox) {
-                options[target.name] = target.checked;
-                cropBoxData = cropper.getCropBoxData();
-                canvasData = cropper.getCanvasData();
-
-                options.ready = function () {
-                    console.log('ready');
-                    cropper.setCropBoxData(cropBoxData).setCanvasData(canvasData);
-                };
-            } else {
-                options[target.name] = target.value;
-                options.ready = function () {
-                    console.log('ready');
-                };
-            }
-
-            // Restart
-            cropper.destroy();
-            cropper = new Cropper(image, options);
-        }
-    };
 
 
     // Methods
