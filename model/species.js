@@ -3,6 +3,7 @@ let mongoose = require('mongoose');
 mongoose.connect(process.env.DB_URL);
 
 let clementsList = (orderName) => {
+    // eslint-disable-next-line new-cap
     let Clements = new require('./clements');
     Clements.find({
         'Order': orderName,
@@ -11,7 +12,7 @@ let clementsList = (orderName) => {
             console.log('Error has occurred  ' + err);
         } else {
            console.log(species);
-            return species;
+            callback(species);
         }
     });
 };

@@ -1,17 +1,17 @@
-let dotenv = require('dotenv');
+// let dotenv = require('dotenv');
 let express = require('express');
-let http = require('http');
+// let http = require('http');
 let path = require('path');
 let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
-let mongodb = require('mongodb');
-let mongoose = require('mongoose');
+// let mongodb = require('mongodb');
+// let mongoose = require('mongoose');
 let cloudinary = require('cloudinary');
 
-let Images = require('./model/images');
-let Clements = require('./model/clements');
+// let Images = require('./model/images');
+// let Clements = require('./model/clements');
 
 let index = require('./routes/index');
 let users = require('./routes/users');
@@ -29,7 +29,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'images/favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

@@ -13,7 +13,8 @@
         "**/deps/**",
         "**/node_modules/**",
         "**/thirdparty/**",
-        "**/third_party/**"
+        "**/third_party/**",
+        "**/jquery/**"
     ],
     "test": [
         "**/test/**",

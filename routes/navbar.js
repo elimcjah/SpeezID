@@ -3,11 +3,13 @@
  */
 
 let express = require('express');
-let router  = express.Router();
+
+// eslint-disable-next-line new-cap
+let router = express.Router();
 
 /* GET Navigation Bar*/
-router.about = function(req, res){
-    res.render('navbar', { title: 'Express' });
+router.about = function(req, res) {
+    res.render('navbar', {title: 'Express'});
 };
 
 module.exports = router;

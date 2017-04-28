@@ -1,9 +1,10 @@
+big_files/
 bootstrap/
+jquery/
 node_modules/
 out/scripts/
 out/fonts/
 out/styles/
-jquery/
 
 
 yarn
