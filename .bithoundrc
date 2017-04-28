@@ -1,0 +1,23 @@
+{
+    "critics": {
+        "lint": {"engine": "eslint"}
+    },
+    "dependencies": {
+        "unused-ignores": [
+          "pug"
+          "eslint"
+        ]
+    },
+    "ignore": [
+        "**/deps/**",
+        "**/node_modules/**",
+        "**/thirdparty/**",
+        "**/third_party/**"
+    ],
+    "test": [
+        "**/test/**",
+        "**/tests/**",
+        "**/spec/**",
+        "**/specs/**"
+    ]
+}

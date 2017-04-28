@@ -5,13 +5,13 @@ let ObjectId = mongoose.Schema.Types.ObjectId;
 
 let nestedDoc = new mongoose.Schema({
     _imageID: ObjectId,
-    VerifiedBird: { type: Boolean, default: false },
+    VerifiedBird: {type: Boolean, default: false},
     FlaggedAsNonBird: Number,
-    Cropped: { type: Boolean, default: false },
-    HasGeoData: { type: Boolean, default: false },
+    Cropped: {type: Boolean, default: false},
+    HasGeoData: {type: Boolean, default: false},
     Cloudinary: Object,
     FlickrData: Object,
-    CroppedData: Object
+    CroppedData: Object,
 });
 let imagesSchema = new mongoose.Schema({
     Order: String,
@@ -20,7 +20,7 @@ let imagesSchema = new mongoose.Schema({
     ScientificName: String,
     Category: String,
     EnglishName: String,
-    ImagesData: [ nestedDoc ]
+    ImagesData: [nestedDoc],
 });
 
 module.exports = mongoose.model('Images', imagesSchema);
