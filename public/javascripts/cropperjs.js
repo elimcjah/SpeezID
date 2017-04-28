@@ -1,5 +1,4 @@
-window.onload = function () {
-
+window.onload = function() {
     'use strict';
 
     let Cropper = window.Cropper;
@@ -8,76 +7,67 @@ window.onload = function () {
     let image = container.getElementsByTagName('img').item(0);
     let download = document.getElementById('download');
     let actions = document.getElementById('actions');
-    let dataX = document.getElementById('dataX');
-    let dataY = document.getElementById('dataY');
-    let dataHeight = document.getElementById('dataHeight');
-    let dataWidth = document.getElementById('dataWidth');
-    let dataRotate = document.getElementById('dataRotate');
-    let dataScaleX = document.getElementById('dataScaleX');
-    let dataScaleY = document.getElementById('dataScaleY');
-    let options = {
+
+  /**
+   * @default true following responsive: boolean, restore: boolean,
+   * checkCrossOrigin: boolean, checkOrientation: boolean, modal: boolean,
+   * guides: boolean, center: boolean, highlight: boolean, background:
+   * boolean, autoCrop: boolean, movable: boolean, rotatable: boolean,
+   * scalable: boolean, zoomable: boolean, zoomOnTouch: boolean, zoomOnWheel:
+   * boolean, cropBoxMovable: boolean, cropBoxResizable: boolean,
+   * toggleDragModeOnDblclick: boolean
+   */
+  let options = {
         preview: '.img-preview',
-        ready: function (e) {
+        ready: function(e) {
             console.log(e.type);
         },
-        zoom: function (e) {
+        zoom: function(e) {
             console.log(e.type, e.detail.ratio);
         },
-        responsive: true, //default is true
-        restore: true, //default is true
-        checkCrossOrigin: true, //default is true
-        checkOrientation: true, //default is true
-        modal: true, //default is true
-        guides: true, //default is true
-        center: true, //default is true
-        highlight: true, //default is true
-        background: true, //default is true
-        autoCrop: true, //default is true
-        movable: true, //default is true
-        rotatable: true, //default is true
-        scalable: true, //default is true
-        zoomable: true, //default is true
-        zoomOnTouch: true, //default is true
-        zoomOnWheel: true, //default is true
-        cropBoxMovable: true, //default is true
-        cropBoxResizable: true, //default is true
-        toggleDragModeOnDblclick: true, //default is true
+        modal: true,
     };
     let cropper = new Cropper(image, options);
     let originalImageURL = image.src;
     let uploadedImageURL;
 
-    // Tooltip
-    $('[data-toggle="tooltip"]').tooltip();
+  /**
+   * Tooltip
+   */
+  $('[data-toggle="tooltip"]').tooltip();
 
-
-    // Buttons
-    if (!document.createElement('canvas').getContext) {
+  /**
+   * Buttons
+   */
+  if (!document.createElement('canvas').getContext) {
         $('button[data-method="getCroppedCanvas"]').prop('disabled', true);
     }
 
-    if (typeof document.createElement('cropper').style.transition === 'undefined') {
+    if (typeof document.createElement('cropper').style.transition ===
+        'undefined') {
         $('button[data-method="rotate"]').prop('disabled', true);
         $('button[data-method="scale"]').prop('disabled', true);
     }
 
-    // Download
-    if (typeof download.download === 'undefined') {
+  /**
+   * Download
+   */
+  if (typeof download.download === 'undefined') {
         download.className += ' disabled';
     }
 
-
-    // Methods
-    actions.querySelector('.docs-buttons').onclick = function (event) {
+  /**
+   *
+   * @param {MouseEvent} event
+   */
+  actions.querySelector('.docs-buttons').onclick = function(event) {
         let e = event || window.event;
         let target = e.target || e.srcElement;
         let result;
         let input;
         let data;
 
-        if (!cropper) {
-            return;
-        }
+        if (!cropper) return;
 
         while (target !== this) {
             if (target.getAttribute('data-method')) {
@@ -87,7 +77,8 @@ window.onload = function () {
             target = target.parentNode;
         }
 
-        if (target === this || target.disabled || target.className.indexOf('disabled') > -1) {
+        if (target === this || target.disabled ||
+            target.className.indexOf('disabled') > -1) {
             return;
         }
 
@@ -95,19 +86,20 @@ window.onload = function () {
             method: target.getAttribute('data-method'),
             target: target.getAttribute('data-target'),
             option: target.getAttribute('data-option'),
-            secondOption: target.getAttribute('data-second-option')
+            secondOption: target.getAttribute('data-second-option'),
         };
 
         if (data.method) {
             if (typeof data.target !== 'undefined') {
                 input = document.querySelector(data.target);
 
-                if (!target.hasAttribute('data-option') && data.target && input) {
-                    try {
-                        data.option = JSON.parse(input.value);
-                    } catch (e) {
-                        console.log(e.message);
-                    }
+                if (!target.hasAttribute('data-option') &&
+                    data.target && input) {
+                      try {
+                          data.option = JSON.parse(input.value);
+                      } catch (e) {
+                          console.log(e.message);
+                      }
                 }
             }
 
@@ -125,21 +117,15 @@ window.onload = function () {
 
                 case 'getCroppedCanvas':
                     if (result) {
-
                         // Bootstrap's Modal
-                        $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+                        $('#getCroppedCanvasModal').modal().find('.modal-body')
+                        .html(result);
 
-                        /**
-                         *
-                         * @TODO if image is less than a min pixel resolution, make bigger.
-                         */
                         if (!download.disabled) {
-
                             console.log(result);
                             download.href = result.toDataURL('image/jpeg');
                         }
                     }
-
                     break;
 
                 case 'destroy':
@@ -164,7 +150,7 @@ window.onload = function () {
         }
     };
 
-    document.body.onkeydown = function (event) {
+    document.body.onkeydown = function(event) {
         let e = event || window.event;
 
         if (!cropper || this.scrollTop > 300) {
@@ -199,7 +185,7 @@ window.onload = function () {
     let inputImage = document.getElementById('inputImage');
 
     if (URL) {
-        inputImage.onchange = function () {
+        inputImage.onchange = (() => {
             let files = this.files;
             let file;
 
@@ -219,7 +205,7 @@ window.onload = function () {
                     window.alert('Please choose an image file.');
                 }
             }
-        };
+        });
     } else {
         inputImage.disabled = true;
         inputImage.parentNode.className += ' disabled';

@@ -15,8 +15,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "eslint": "./node_modules/.bin/eslint ",
-    "run-one-flickr": "node ./public/javascripts/get-images/image-search.js",
-    "run-many-flickr": "node ./public/javascripts/get-images/image-search-batch.js"
+    "get-flickr": "node ./public/javascripts/get-images/image-search.js"
   },
   "dependencies": {
     "assert": "^1.4.1",
@@ -41,6 +40,7 @@
     "debug": "~2.6.0",
     "eslint": "^3.19.0",
     "eslint-config-google": "^0.7.1",
+    "eslint-plugin-jsdoc": "^3.0.2",
     "eslint-plugin-pug": "^1.0.0",
     "jasmine": "^2.6.0",
     "jsdoc": "^3.4.3"

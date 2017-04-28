@@ -4,8 +4,9 @@
     },
     "dependencies": {
         "unused-ignores": [
-          "pug"
-          "eslint"
+          "pug",
+          "eslint",
+          "assert"
         ]
     },
     "ignore": [

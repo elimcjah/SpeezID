@@ -1,4 +1,8 @@
+###### [Bithound Continuous Code Analysis](https://www.bithound.io/github/elimcjah/SpeezID/) 
 [![bitHound Overall Score](https://www.bithound.io/github/elimcjah/SpeezID/badges/score.svg)](https://www.bithound.io/github/elimcjah/SpeezID) [![bitHound Dependencies](https://www.bithound.io/github/elimcjah/SpeezID/badges/dependencies.svg)](https://www.bithound.io/github/elimcjah/SpeezID/master/dependencies/npm) [![bitHound Dev Dependencies](https://www.bithound.io/github/elimcjah/SpeezID/badges/devDependencies.svg)](https://www.bithound.io/github/elimcjah/SpeezID/master/dependencies/npm)
+
+###### [Travis CI Continuous Integration Service](https://travis-ci.org/) 
+[![Build Status](https://travis-ci.org/elimcjah/SpeezID.svg?branch=master)](https://travis-ci.org/elimcjah/SpeezID)
 
 # SpeezID
 
@@ -6,14 +10,14 @@
 
 ## Frameworks
 
-- Javascript
-- Node.js
+- Cropper.js
 - Express.js
-- Pug
+- Jest Javascript Testing
 - jQuery
+- Pug
 - MongoDB
 - Mongoose
-- Cropper.js
+- Node.js
 
 ## APIs
 
@@ -23,7 +27,7 @@
 
 ### To Do
 
-- [ ] Once yarnpkg/yarn issue #3224 is resolved, need to reset 
+-[ ] Once yarnpkg/yarn issue #3224 is resolved, need to reset 
       heroku config:set NODE_MODULES_CACHE=true where it is now set to false.
 
 

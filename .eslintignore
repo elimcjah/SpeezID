@@ -1,4 +1,9 @@
+bootstrap/
 node_modules/
 out/scripts/
+out/fonts/
+out/styles/
+jquery/
+
 
 yarn
