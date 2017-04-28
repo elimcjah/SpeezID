@@ -129,12 +129,13 @@ window.onload = function () {
                         // Bootstrap's Modal
                         $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
 
+                        /**
+                         *
+                         * @TODO if image is less than a min pixel resolution, make bigger.
+                         */
                         if (!download.disabled) {
-                            /**
-                             *
-                             * @TODO if image is less than a min pixel resolution, make bigger.
-                             */
 
+                            console.log(result);
                             download.href = result.toDataURL('image/jpeg');
                         }
                     }
