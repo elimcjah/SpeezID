@@ -492,7 +492,7 @@ class ImageSearch {
                 }
                 imageObj.ImagesData.Cloudinary = imagePath;
                 imageObj.ImagesData.FlickrData = flickrJson['photo'];
-
+                // TODO(me): Finish the FindOneAndUpdate for images
                 //     var query = {
                 //         Order: imageObj.Order,
                 //         Family: imageObj.Family,
