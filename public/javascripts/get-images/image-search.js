@@ -259,7 +259,6 @@ class ImageSearch {
             }
                    ) );
         } else if(iterations > -1 && iterations > alphabetized ) {
-            console.log('inside the else if and iterations = '+ iterations);
             console.log('keepALphabetical =  '+ alphabetized);
             this.search(keyword[alphabetized]).then((id) => {
                     if(id === 5565732642) {
