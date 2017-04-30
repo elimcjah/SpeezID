@@ -240,7 +240,7 @@ class ImageSearch {
         });
 
         if(iterations === -1) {
-          console.log('keepALphabetical = '+ alphabetized);
+          console.log('keepALphabetical =  '+ alphabetized);
           storeKeywords.then(()=> this.search(keyword[alphabetized]).
               then((id) => {
                 if(id === 5565732642) {
@@ -260,7 +260,7 @@ class ImageSearch {
                    ) );
         } else if(iterations > -1 && iterations > alphabetized ) {
             console.log('inside the else if and iterations = '+ iterations);
-            console.log('keepALphabetical = '+ alphabetized);
+            console.log('keepALphabetical =  '+ alphabetized);
             this.search(keyword[alphabetized]).then((id) => {
                     if(id === 5565732642) {
                       console.log('No image for: ' + keyword[alphabetized - 1]);
