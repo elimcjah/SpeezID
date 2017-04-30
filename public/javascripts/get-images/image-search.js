@@ -448,7 +448,6 @@ class ImageSearch {
      * @methodOf ImageSearch
      * @memberOf ImageSearch
      *
-     *
      * @param {Object} imagePath - JSON object with cloudinary data about
      *    stored image
      * @param {Object} flickrJson - JSON object with data about image of
