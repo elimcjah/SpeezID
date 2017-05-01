@@ -15,7 +15,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "eslint": "./node_modules/.bin/eslint ",
-    "get-flickr": "node ./public/javascripts/get-images/image-search.js"
+    "get-flickr": "node ./public/javascripts/flickr/image-search.js"
   },
   "dependencies": {
     "assert": "^1.4.1",
