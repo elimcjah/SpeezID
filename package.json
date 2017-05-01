@@ -15,7 +15,9 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "eslint": "./node_modules/.bin/eslint ",
-    "get-flickr": "node ./public/javascripts/flickr/image-search.js"
+    "get-flickr": "node ./public/javascripts/flickr/image-search.js",
+    "search": "node ./public/javascripts/flickr/clementsdb.class.js",
+    "test": "jest"
   },
   "dependencies": {
     "assert": "^1.4.1",
@@ -31,9 +33,13 @@
     "node-sass-middleware": "^0.11.0",
     "nodemon": "^1.11.0",
     "pug": "~2.0.0-beta10",
+    "request": "^2.81.0",
     "serve-favicon": "^2.4.2"
   },
   "devDependencies": {
+    "babel-jest": "^19.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
     "bithound": "^1.7.0",
     "csvtojson": "^1.1.4",
     "debug": "~2.6.0",
@@ -41,7 +47,7 @@
     "eslint-config-google": "^0.7.1",
     "eslint-plugin-jsdoc": "^3.0.2",
     "eslint-plugin-pug": "^1.0.0",
-    "jasmine": "^2.6.0",
+    "jest": "^19.0.2",
     "jsdoc": "^3.4.3"
   }
 }
