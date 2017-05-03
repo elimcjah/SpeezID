@@ -23,6 +23,7 @@ class Flickr {
   }
 
   /**
+   *
    * @method
    * @methodOf Flickr
    * @param {String} scientificName - Scientific Name with no whitespace
